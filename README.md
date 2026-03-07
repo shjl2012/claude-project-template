@@ -27,9 +27,6 @@ A minimal documentation system for AI-assisted development with Claude Code. Des
 ├── scripts/               # Standalone scripts and pipeline runners
 │   ├── CLAUDE.md
 │   └── README.md
-├── plan/                  # Code plans — write before implementing
-│   ├── CLAUDE.md
-│   └── README.md
 ├── docs/                  # Human-facing project documentation
 │   ├── CLAUDE.md
 │   └── README.md

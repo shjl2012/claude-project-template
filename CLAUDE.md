@@ -25,9 +25,8 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 | `notebooks/` | Jupyter notebooks for EDA and experiments |
 | `tests/` | Pytest test suite |
 | `scripts/` | Standalone scripts and pipeline runners |
-| `plan/` | Code plans — write here before implementing |
 | `docs/` | Human-facing project documentation |
-| `to_do/` | Task specs (delete when complete) |
+| `to_do/` | Task specs with planning — move to `recycle_bin/` when complete |
 | `recycle_bin/` | Soft-delete holding area (no rm — move here instead) |
 
 ## Key Conventions
@@ -36,8 +35,7 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 - **[Domain constant]**: [value or file pointer]
 - **[Naming convention]**: [rule]
 - **No rm**: Move unwanted files to `recycle_bin/` instead of deleting
-- **Plan first**: Write plans in `plan/` before implementing
-- **Tasks**: `to_do/P{0-3}_{priority}_*.md` — move to `recycle_bin/` when complete
+- **Tasks**: `to_do/P{0-3}_{priority}_*.md` — plan + implement, move to `recycle_bin/` when complete
 - **Docs**: Every directory has a `CLAUDE.md` (for Claude) and `README.md` (for humans)
 - **[Any other invariant short enough for inline mention]**
 
