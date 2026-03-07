@@ -1,22 +1,25 @@
 {
     "env": {
         "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1",
-        "PYTHONPATH": "/home/john_sh_lin/.claude/skills/scripts",
-        "PROJECT": "/home/john_sh_lin/GitHub/claude-project-template"
+        "PYTHONPATH": "/home/john_sh_lin/.claude/skills/scripts"
     },
     "permissions": {
         "allow": [
             "Read(./**)",
+            "Read(//home/john_sh_lin/.claude/**)",
             "Write(./**)",
             "Edit(./**)",
             "Bash(ls *)",
             "Bash(wc *)",
-            "Bash(mkdir -p $PROJECT/*)",
-            "Bash(mv $PROJECT/*)",
-            "Bash(rm $PROJECT/recycle_bin/*)",
-            "Bash(cp /tmp/planner-* $PROJECT/*)",
-            "Bash(mv $PROJECT/* $PROJECT/recycle_bin/*)",
-            "Bash(rm $PROJECT/recycle_bin/*)",
+            "Bash(mkdir *)",
+            "Bash(cp *)",
+            "Bash(mv *)",
+            "Bash(cat *)",
+            "Bash(head *)",
+            "Bash(diff *)",
+            "Bash(md5sum *)",
+            "Bash(cd *)",
+            "Bash(rm */recycle_bin/*)",
             "Bash(find *)",
             "Bash(grep *)",
             "Bash(python3 -m skills.*)",
@@ -24,7 +27,12 @@
             "Bash(jq *)",
             "Bash(conda run *)",
             "Bash(docker exec -i house-price-postgres psql *)",
-            "Bash(mkdir -p /home/john_sh_lin/GitHub/claude-project-template/docs)"
+            "Bash(mkdir /tmp/planner-*)",
+            "Bash(mv /tmp/planner-*)",
+            "Read(//tmp/planner-**)",
+            "Write(//tmp/planner-**)",
+            "Edit(//tmp/planner-**)",
+            "WebSearch"
         ]
     }
 }
