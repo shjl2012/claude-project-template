@@ -34,4 +34,4 @@
 - [Link to old implementation, design doc, or external spec]
 - [Any prior analysis or decision context]
 
-<!-- Delete this file when the task is complete. -->
+<!-- Move this file to recycle_bin/ when the task is complete. -->

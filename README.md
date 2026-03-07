@@ -2,6 +2,46 @@
 
 A minimal documentation system for AI-assisted development with Claude Code. Designed to solve three problems: repeated codebase scanning each session, schema/contract drift between coupled files, and cross-session state loss across machines.
 
+## Project Structure
+
+```
+.
+├── CLAUDE.md              # Auto-loaded index with triggers (~200 tokens max)
+├── CURRENT_STATE.md       # Current phase, next action, machine (overwrite each session)
+├── ARCHITECTURE.md        # Stable architectural decisions (~500 tokens)
+├── pyproject.toml         # Poetry project & dependency configuration
+├── poetry.toml            # Poetry local settings
+├── requirement.txt        # Minimal bootstrap dependencies (poetry itself)
+├── src/                   # Python source modules
+│   ├── CLAUDE.md
+│   └── README.md
+├── data/                  # Raw, processed, and external data
+│   ├── CLAUDE.md
+│   └── README.md
+├── notebooks/             # Jupyter notebooks for EDA and experiments
+│   ├── CLAUDE.md
+│   └── README.md
+├── tests/                 # Pytest test suite
+│   ├── CLAUDE.md
+│   └── README.md
+├── scripts/               # Standalone scripts and pipeline runners
+│   ├── CLAUDE.md
+│   └── README.md
+├── plan/                  # Code plans — write before implementing
+│   ├── CLAUDE.md
+│   └── README.md
+├── docs/                  # Human-facing project documentation
+│   ├── CLAUDE.md
+│   └── README.md
+├── to_do/                 # Task specs (move to recycle_bin when complete)
+│   ├── CLAUDE.md
+│   ├── README.md
+│   └── P{n}_{priority}_*.md
+└── recycle_bin/            # Soft-delete holding area (no rm allowed)
+    ├── CLAUDE.md
+    └── README.md
+```
+
 ## Files
 
 | File | Purpose | Update frequency |
@@ -21,9 +61,15 @@ A minimal documentation system for AI-assisted development with Claude Code. Des
 4. Set `CURRENT_STATE.md` to your starting phase
 5. Create task files in `to_do/` for your first work items
 
-### Per-directory CLAUDE.md (conditional)
+### Two-file pattern (enforced)
 
-Add a `CLAUDE.md` inside any directory where two or more files share a contract that breaks silently if one side changes without the other. Keep it to 3–5 lines:
+Every directory has two documentation files:
+- **`CLAUDE.md`** — For Claude Code. Triggers, contracts, and coupling rules. Loaded automatically when Claude enters the directory.
+- **`README.md`** — For humans. Purpose, structure, and usage conventions.
+
+### Per-directory CLAUDE.md (content guidance)
+
+Add coupling rules to a directory's `CLAUDE.md` when two or more files share a contract that breaks silently if one side changes without the other. Keep it to 3–5 lines:
 
 ```markdown
 # Schema Contract — [layer name]
@@ -60,4 +106,5 @@ If test/build/lint commands aren't self-evident from project structure, add a Co
 - **CURRENT_STATE.md is overwritten, never appended** — it holds current state only. Historical log belongs in a separate archive file.
 - **Triggers fire at the right moment** — point to files that Claude should open *when a specific action is taken*, not always.
 - **Per-directory CLAUDE.md is structural enforcement** — it fires automatically when Claude enters the directory, not when Claude remembers to check.
-- **Task files are deleted when done** — they're specs, not history. Completed work belongs in git history or an archive.
+- **Task files are moved to `recycle_bin/` when done** — they're specs, not history. Completed work belongs in git history or an archive.
+- **No rm allowed** — move unwanted files to `recycle_bin/` for manual cleanup.

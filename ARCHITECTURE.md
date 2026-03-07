@@ -13,6 +13,7 @@
 
 | Decision | Choice | Why |
 |---|---|---|
+| Package management | Poetry (`pyproject.toml`) | Lockfile reproducibility; `requirement.txt` only bootstraps Poetry itself |
 | [e.g. Database] | [e.g. PostgreSQL + PostGIS] | [e.g. Spatial indexing needed for buffer queries] |
 | [e.g. ORM vs raw SQL] | [e.g. Raw psycopg2] | [e.g. PostGIS functions not well-supported by ORMs] |
 | [e.g. Validation] | [e.g. Pydantic planned] | [e.g. Type safety at API boundary] |

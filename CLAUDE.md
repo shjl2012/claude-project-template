@@ -16,11 +16,29 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 | [Another trigger] | [What to open] |
 | Need session history or past rationale | `[path/to/archived/CONVERSATION_CONTEXT.md]` |
 
+## Project Layout
+
+| Directory | Purpose |
+|-----------|---------|
+| `src/` | Python source modules |
+| `data/` | Raw, processed, and external data |
+| `notebooks/` | Jupyter notebooks for EDA and experiments |
+| `tests/` | Pytest test suite |
+| `scripts/` | Standalone scripts and pipeline runners |
+| `plan/` | Code plans — write here before implementing |
+| `docs/` | Human-facing project documentation |
+| `to_do/` | Task specs (delete when complete) |
+| `recycle_bin/` | Soft-delete holding area (no rm — move here instead) |
+
 ## Key Conventions
 
+- **Package management**: Poetry via `pyproject.toml` — do not use pip install directly
 - **[Domain constant]**: [value or file pointer]
 - **[Naming convention]**: [rule]
-- **Tasks**: `to_do/P{0-3}_{priority}_*.md` — delete file when complete
+- **No rm**: Move unwanted files to `recycle_bin/` instead of deleting
+- **Plan first**: Write plans in `plan/` before implementing
+- **Tasks**: `to_do/P{0-3}_{priority}_*.md` — move to `recycle_bin/` when complete
+- **Docs**: Every directory has a `CLAUDE.md` (for Claude) and `README.md` (for humans)
 - **[Any other invariant short enough for inline mention]**
 
 <!-- ── HOW TO USE THIS FILE ──────────────────────────────────────────────────
