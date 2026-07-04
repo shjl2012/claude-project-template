@@ -14,6 +14,7 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 |------|------|
 | [Coupling-risk action, e.g. "Modifying models/ or serializers/"] | [File to read] + [Script to run, if any] |
 | [Another trigger] | [What to open] |
+| Starting a new feature or nontrivial fix | Run `/opsx:propose` (OpenSpec) before touching code — requires `openspec` CLI, see README Prerequisites |
 | Need session history or past rationale | `[path/to/archived/CONVERSATION_CONTEXT.md]` |
 
 ## Project Layout
@@ -37,6 +38,7 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 - **No rm**: Move unwanted files to `recycle_bin/` instead of deleting
 - **Tasks**: `to_do/P{0-3}_{priority}_*.md` — plan + implement, move to `recycle_bin/` when complete
 - **Docs**: Every directory has a `CLAUDE.md` (for Claude) and `README.md` (for humans)
+- **Skills**: Superpowers plugin skills (TDD, debugging, planning) auto-activate — install once per machine, see README Prerequisites
 - **[Any other invariant short enough for inline mention]**
 
 <!-- ── HOW TO USE THIS FILE ──────────────────────────────────────────────────
