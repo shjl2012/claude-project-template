@@ -18,3 +18,11 @@ schema: spec-driven
 #       - Always include a "Non-goals" section
 #     tasks:
 #       - Break tasks into chunks of max 2 hours
+
+operations:
+  archive:
+    guidance:
+      - Before completing this archive, check whether the change being
+        archived affects README.md's [Section A], [Section B], or
+        [Section C] sections (replace with your project's actual section
+        names), and update README.md accordingly if so.

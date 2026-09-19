@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Session Start
 
-Read `CURRENT_STATE.md` first — current phase, next action, active artifact, machine. Then open the active task file in `to_do/` named in the Next field.
+Read `CURRENT_STATE.md` first — current phase, next action, active artifact, machine. Then open the active change under `openspec/changes/` named in the Next field.
 
 ## Triggers
 
@@ -14,7 +14,8 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 |------|------|
 | [Coupling-risk action, e.g. "Modifying models/ or serializers/"] | [File to read] + [Script to run, if any] |
 | [Another trigger] | [What to open] |
-| Starting a new feature or nontrivial fix | Run `/opsx:propose` (OpenSpec) before touching code — requires `openspec` CLI, see README Prerequisites |
+| Starting any new coding task | Run `/opsx:propose` (OpenSpec) before touching code — requires `openspec` CLI, see README Prerequisites |
+| Writing or editing code | `docs/CODE_QUALITY.md` (hook enforces a subset automatically) |
 | Need session history or past rationale | `[path/to/archived/CONVERSATION_CONTEXT.md]` |
 
 ## Project Layout
@@ -27,16 +28,16 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 | `tests/` | Pytest test suite |
 | `scripts/` | Standalone scripts and pipeline runners |
 | `docs/` | Human-facing project documentation |
-| `to_do/` | Task specs with planning — move to `recycle_bin/` when complete |
+| `openspec/changes/` | Task tracking — active OpenSpec changes (see Repo level workflow rules) |
 | `recycle_bin/` | Soft-delete holding area (no rm — move here instead) |
 
 ## Key Conventions
 
-- **Package management**: Poetry via `pyproject.toml` — do not use pip install directly
+- **Package management**: uv via `pyproject.toml` + `uv.lock` — do not use pip install directly
 - **[Domain constant]**: [value or file pointer]
 - **[Naming convention]**: [rule]
 - **No rm**: Move unwanted files to `recycle_bin/` instead of deleting
-- **Tasks**: `to_do/P{0-3}_{priority}_*.md` — plan + implement, move to `recycle_bin/` when complete
+- **Tasks**: Tracked exclusively via `openspec/changes/`
 - **Docs**: Every directory has a `CLAUDE.md` (for Claude) and `README.md` (for humans)
 - **Skills**: Superpowers plugin skills (TDD, debugging, planning) auto-activate — install once per machine, see README Prerequisites
 - **[Any other invariant short enough for inline mention]**
@@ -48,3 +49,10 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
   This file is auto-loaded on every session — every token here competes with
   task-relevant context. When in doubt, leave it out.
 ─────────────────────────────────────────────────────────────────────────── -->
+
+## Repo level workflow rules
+1. **Brainstorm before creative work.** Invoke the `superpowers:brainstorming` skill for any brainstorming task, including but not limited to: understanding the requirements of a new feature, finding the root cause of a bug or error, or refactoring/restructuring code.
+
+2. **Use the OpenSpec workflow for all coding tasks.** Strictly follow the write openspec change -> apply workflow for any coding task within this repo.
+
+3. **OpenSpec is the single source of truth for specs.** All specs must be written using OpenSpec, including specs produced during a `superpowers:brainstorming` session. Brainstorming output should be captured into OpenSpec rather than left in chat or ad-hoc docs.

@@ -1,0 +1,30 @@
+{
+    "hooks": {
+        "PreToolUse": [
+            {
+                "matcher": "Write|Edit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 .claude/hooks/check_openspec_active.py",
+                        "timeout": 10,
+                        "statusMessage": "Checking for an active OpenSpec change..."
+                    }
+                ]
+            }
+        ],
+        "PostToolUse": [
+            {
+                "matcher": "Write|Edit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 .claude/hooks/check_code_quality.py",
+                        "timeout": 30,
+                        "statusMessage": "Checking code quality checklist..."
+                    }
+                ]
+            }
+        ]
+    }
+}
