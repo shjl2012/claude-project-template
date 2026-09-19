@@ -1,17 +1,6 @@
-# task-workflow-governance Specification
+# Spec Delta
 
-## Purpose
-
-Defines OpenSpec as the sole task-tracking and coding-workflow gate for this repo, replacing the `to_do/` convention, so all coding work is planned and traceable through OpenSpec changes.
-
-## Requirements
-
-### Requirement: OpenSpec is the sole task-tracking system
-The system SHALL NOT provide or reference a `to_do/` directory or file-based task convention. All task tracking SHALL occur via `openspec/changes/`.
-
-#### Scenario: No to_do directory exists
-- **WHEN** a user inspects the repository root
-- **THEN** no `to_do/` directory is present and CLAUDE.md/README.md contain no references to it
+## MODIFIED Requirements
 
 ### Requirement: Session start routes to the active OpenSpec change
 CLAUDE.md's Session Start section SHALL direct a new session to determine the active (non-archived) OpenSpec change and its next action by querying OpenSpec directly (e.g. `openspec list --json` for the active change, that change's `tasks.md` for the next unchecked task) rather than reading a hand-maintained "Next" field in a project file. It SHALL direct the session to consult `SESSION.md` only for machine/environment handoff notes and non-spec blockers.
@@ -24,6 +13,8 @@ CLAUDE.md's Session Start section SHALL direct a new session to determine the ac
 - **WHEN** a new session reads CLAUDE.md's Session Start instructions and `openspec list --json` reports no non-archived change
 - **THEN** it is directed to check `SESSION.md` only for machine/environment handoff notes and non-spec blockers, not for phase or next-action information
 
+## ADDED Requirements
+
 ### Requirement: SESSION.md is scoped to information OpenSpec does not track
 The system SHALL provide a `SESSION.md` file (replacing `CURRENT_STATE.md`) that records only information OpenSpec's change-tracking does not cover: machine/environment handoff details and blockers that are not tied to any single OpenSpec change's content. It SHALL NOT contain phase, next-action, or active-artifact fields that duplicate what an OpenSpec change's `proposal.md`/`tasks.md` already tracks.
 
@@ -34,18 +25,3 @@ The system SHALL provide a `SESSION.md` file (replacing `CURRENT_STATE.md`) that
 #### Scenario: No CURRENT_STATE.md remains
 - **WHEN** a user inspects the repository root
 - **THEN** no `CURRENT_STATE.md` file is present and CLAUDE.md/README.md contain no references to it
-
-### Requirement: Coding tasks require an active OpenSpec change
-The repository SHALL enforce, via a PreToolUse hook, that `Write` or `Edit` operations targeting code files under `src/`, `tests/`, `scripts/` (`.py`) or `notebooks/` (`.ipynb`) are blocked unless at least one non-archived change directory exists under `openspec/changes/`.
-
-#### Scenario: Edit attempted with no active change
-- **WHEN** a `Write` or `Edit` tool call targets a `.py` file under `src/` and `openspec/changes/` contains no directories other than `archive`
-- **THEN** the hook blocks the operation and its message directs the user to run `/opsx:propose`
-
-#### Scenario: Edit allowed with an active change
-- **WHEN** a `Write` or `Edit` tool call targets a `.py` file under `src/` and `openspec/changes/` contains at least one non-archived change directory
-- **THEN** the hook allows the operation to proceed
-
-#### Scenario: Edit outside gated directories is unaffected
-- **WHEN** a `Write` or `Edit` tool call targets a file outside `src/`, `tests/`, `scripts/`, `notebooks/` (e.g. `README.md`)
-- **THEN** the hook does not block the operation regardless of active-change state

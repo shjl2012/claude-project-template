@@ -45,7 +45,7 @@ Skills (TDD, debugging, brainstorming, writing plans, code review) activate auto
 ```
 .
 ├── CLAUDE.md              # Auto-loaded index with triggers (~200 tokens max)
-├── CURRENT_STATE.md       # Current phase, next action, machine (overwrite each session)
+├── SESSION.md             # Machine + non-spec blockers only (overwrite each session)
 ├── ARCHITECTURE.md        # Stable architectural decisions (~500 tokens)
 ├── openspec/              # OpenSpec specs & changes (requires `openspec` CLI — see Prerequisites)
 ├── pyproject.toml         # Project & dependency configuration (uv)
@@ -78,7 +78,7 @@ Skills (TDD, debugging, brainstorming, writing plans, code review) activate auto
 | File | Purpose | Update frequency |
 |---|---|---|
 | `CLAUDE.md` | Auto-loaded index with triggers. ~200 tokens max. | Rarely — only when project structure changes |
-| `CURRENT_STATE.md` | Current phase, next action, active artifact, machine. | Every session (overwrite, never append) |
+| `SESSION.md` | Machine/environment handoff and non-spec blockers only. Phase/next-action live in `openspec/changes/`. | Every session (overwrite, never append) |
 | `ARCHITECTURE.md` | Stable decisions not readable from code. ~500 tokens. | Rarely — only when architectural decisions change |
 
 ## How to Use
@@ -89,7 +89,7 @@ Skills (TDD, debugging, brainstorming, writing plans, code review) activate auto
 1. Copy this directory into your project root
 2. Fill in `CLAUDE.md`: project identity, triggers for your coupling-risk locations, key conventions
 3. Fill in `ARCHITECTURE.md`: tech stack decisions, layer contracts, key invariants
-4. Set `CURRENT_STATE.md` to your starting phase
+4. Set `SESSION.md`'s `Machine` field for your environment
 5. Customize `openspec/config.yaml`'s archive guidance to reference your own README's actual section names
 6. Propose your first work item with `/opsx:propose` (OpenSpec)
 
@@ -135,7 +135,7 @@ If test/build/lint commands aren't self-evident from project structure, add a Co
 ## Design Principles
 
 - **CLAUDE.md is auto-loaded unconditionally** — every token competes with task context. Keep it minimal. If in doubt, leave it out.
-- **CURRENT_STATE.md is overwritten, never appended** — it holds current state only. Historical log belongs in a separate archive file.
+- **SESSION.md is overwritten, never appended** — it holds only machine/session handoff notes and non-spec blockers, not project phase (that lives in OpenSpec). Historical log belongs in a separate archive file.
 - **Triggers fire at the right moment** — point to files that Claude should open *when a specific action is taken*, not always.
 - **Per-directory CLAUDE.md is structural enforcement** — it fires automatically when Claude enters the directory, not when Claude remembers to check.
 - **No rm allowed** — move unwanted files to `recycle_bin/` for manual cleanup.

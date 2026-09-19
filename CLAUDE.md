@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Session Start
 
-Read `CURRENT_STATE.md` first — current phase, next action, active artifact, machine. Then open the active change under `openspec/changes/` named in the Next field.
+Run `openspec list --json` to find the active (non-archived) change, then read that change's `tasks.md` for the next unchecked task. If no active change exists, check `SESSION.md` only for machine/environment handoff notes and non-spec blockers.
 
 ## Triggers
 
@@ -42,13 +42,8 @@ Read `CURRENT_STATE.md` first — current phase, next action, active artifact, m
 - **Skills**: Superpowers plugin skills (TDD, debugging, planning) auto-activate — install once per machine, see README Prerequisites
 - **[Any other invariant short enough for inline mention]**
 
-<!-- ── HOW TO USE THIS FILE ──────────────────────────────────────────────────
-  Keep this file under ~200 tokens (roughly 150 words of prose).
-  If a convention needs more than one line, it belongs in ARCHITECTURE.md.
-  If a trigger needs context to act on, it belongs in the file it points to.
-  This file is auto-loaded on every session — every token here competes with
-  task-relevant context. When in doubt, leave it out.
-─────────────────────────────────────────────────────────────────────────── -->
+<!-- Keep this file near ~150 words (see README Design Principles). If a
+     convention needs more than one line, it belongs in ARCHITECTURE.md. -->
 
 ## Repo level workflow rules
 1. **Brainstorm before creative work.** Invoke the `superpowers:brainstorming` skill for any brainstorming task, including but not limited to: understanding the requirements of a new feature, finding the root cause of a bug or error, or refactoring/restructuring code.
