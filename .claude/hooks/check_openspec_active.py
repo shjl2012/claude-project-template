@@ -16,6 +16,10 @@ GATED_PATTERN = re.compile(
     r"^(?:src|tests|scripts)/.*\.py$|^notebooks/.*\.ipynb$"
 )
 
+# Resolved from this file (<root>/.claude/hooks/), not os.getcwd(): the shell's
+# cwd can drift into a subdirectory, which would make every path miss the gate.
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 
 def has_active_change(project_root):
     changes_dir = os.path.join(project_root, "openspec", "changes")
@@ -39,13 +43,12 @@ def main():
         return
 
     file_path = data.get("tool_input", {}).get("file_path", "")
-    project_root = os.getcwd()
-    rel_path = os.path.relpath(file_path, project_root) if os.path.isabs(file_path) else file_path
+    rel_path = os.path.relpath(file_path, PROJECT_ROOT) if os.path.isabs(file_path) else file_path
 
     if not GATED_PATTERN.match(rel_path):
         return
 
-    if has_active_change(project_root):
+    if has_active_change(PROJECT_ROOT):
         return
 
     output = {

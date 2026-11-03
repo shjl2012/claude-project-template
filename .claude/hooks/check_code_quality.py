@@ -31,12 +31,14 @@ def new_content_from(data):
     return tool_input.get("content", "")
 
 
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
 def run_vulture(file_path):
-    project_root = os.getcwd()
     try:
         result = subprocess.run(
             ["vulture", file_path, "--min-confidence", "80"],
-            cwd=project_root,
+            cwd=PROJECT_ROOT,
             capture_output=True,
             text=True,
             timeout=20,
