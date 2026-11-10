@@ -11,6 +11,28 @@
                         "statusMessage": "Checking for an active OpenSpec change..."
                     }
                 ]
+            },
+            {
+                "matcher": "Bash",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check_git_branch.py",
+                        "timeout": 10,
+                        "statusMessage": "Checking git branch workflow..."
+                    }
+                ]
+            },
+            {
+                "matcher": "Write|Edit",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check_git_branch.py",
+                        "timeout": 10,
+                        "statusMessage": "Checking git branch workflow..."
+                    }
+                ]
             }
         ],
         "PostToolUse": [
@@ -22,6 +44,18 @@
                         "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check_code_quality.py",
                         "timeout": 30,
                         "statusMessage": "Checking code quality checklist..."
+                    }
+                ]
+            }
+        ],
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check_git_branch.py",
+                        "timeout": 10,
+                        "statusMessage": "Checking git branch workflow..."
                     }
                 ]
             }

@@ -51,3 +51,5 @@ Run `openspec list --json` to find the active (non-archived) change, then read t
 2. **Use the OpenSpec workflow for all coding tasks.** Strictly follow the write openspec change -> apply workflow for any coding task within this repo.
 
 3. **OpenSpec is the single source of truth for specs.** All specs must be written using OpenSpec, including specs produced during a `superpowers:brainstorming` session. Brainstorming output should be captured into OpenSpec rather than left in chat or ad-hoc docs.
+
+4. **One branch per OpenSpec change; merge only after archive.** Never commit directly to `main`/`master`. Develop each change on `<type>/<change-name>` (e.g. `feat/add-x`), archive it on that branch, then merge with `git merge --no-ff` and delete the branch with `git branch -d` (never `-D`). Run `.githooks/install` once per clone; git and Claude Code hooks enforce these rules.
