@@ -26,3 +26,11 @@ operations:
         archived affects README.md's [Section A], [Section B], or
         [Section C] sections (replace with your project's actual section
         names), and update README.md accordingly if so.
+      - Archive on the change's own branch (`<type>/<change-name>`), never
+        on main/master. After the archive move, commit it on that branch.
+      - Then merge into the protected branch with a merge commit
+        (`git switch main && git merge --no-ff <type>/<change-name>`).
+        Never squash or fast-forward. The git hooks reject merging a
+        change that is still unarchived.
+      - Finally delete the source branch with the safe delete
+        (`git branch -d <type>/<change-name>`). Never use `git branch -D`.

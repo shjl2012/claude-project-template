@@ -1,0 +1,11 @@
+#!/bin/sh
+# One-time per-clone setup for the branch workflow (idempotent).
+#   core.hooksPath=.githooks  activates the versioned git hooks
+#   merge.ff=false            local merges always create a merge commit
+#   pull.ff=only              `git pull` only fast-forwards (no junk merge commits)
+set -e
+cd "$(git rev-parse --show-toplevel)"
+git config --local core.hooksPath .githooks
+git config --local merge.ff false
+git config --local pull.ff only
+echo "Branch workflow hooks installed (core.hooksPath=.githooks, merge.ff=false, pull.ff=only)."
